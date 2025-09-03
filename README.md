@@ -19,6 +19,8 @@
 
   <p align="center">
     <img src="https://github.com/Xiryl/compose-stories/blob/main/ot/preview.gif?raw=true" width="240" alt="Compose Stories demo 1"/>
+    <img src="https://github.com/Xiryl/compose-stories/blob/main/ot/demo1.png?raw=true" width="240" alt="Compose Stories demo 2"/>
+    <img src="https://github.com/Xiryl/compose-stories/blob/main/ot/demo2.png?raw=true" width="240" alt="Compose Stories demo 3"/>
   </p>
 </p>
 
