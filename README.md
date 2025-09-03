@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center">📖 Compose Stories</h1>
+  <h1 align="center">🤖 📖 Compose Stories</h1>
   <p align="center">
     A lightweight, customizable <b>Instagram-like Stories player</b> for Jetpack Compose.<br/>
     Supports images, videos, progress bars, gestures, titles, and custom styling.
@@ -93,14 +93,12 @@ val state = remember {
     )
 }
 
-var isPaused by remember { mutableStateOf(false) }
-
 StoryPlayer(
     state = state,
     title = "Demo Story",
     onPrev = { /* go back */ },
     onNext = { /* go forward */ },
-    onPauseChanged = { paused -> isPaused = paused },
+    onPauseChanged = { /* handle pause */ },
     onDismiss = { /* close viewer */ }
 )
 ```
