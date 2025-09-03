@@ -3,12 +3,12 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.detekt)
-    id("com.vanniktech.maven.publish")
-    id("com.gradleup.nmcp")
+    id("com.vanniktech.maven.publish") version "0.34.0"
+    id("com.gradleup.nmcp") version "1.1.0"
 }
 
 android {
-    namespace = "it.chiarani.library"
+    namespace = "it.chiarani.composeStories"
     compileSdk = 36
 
     defaultConfig {
@@ -61,4 +61,43 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.coil.compose)
+}
+
+mavenPublishing {
+    coordinates(
+        groupId = project.findProperty("GROUP") as String,
+        artifactId = project.findProperty("POM_ARTIFACT_ID") as String,
+        version = project.findProperty("VERSION_NAME") as String
+    )
+
+    publishToMavenCentral(false)
+
+    signAllPublications()
+
+    pom {
+        name.set(project.findProperty("POM_NAME") as String)
+        description.set(project.findProperty("POM_DESCRIPTION") as String)
+        inceptionYear.set(project.findProperty("POM_INCEPTION_YEAR") as String)
+        url.set(project.findProperty("POM_URL") as String)
+
+        licenses {
+            license {
+                name.set(project.findProperty("POM_LICENSE_NAME") as String)
+                url.set(project.findProperty("POM_LICENSE_URL") as String)
+                distribution.set(project.findProperty("POM_LICENSE_DIST") as String)
+            }
+        }
+        scm {
+            url.set(project.findProperty("POM_SCM_URL") as String)
+            connection.set(project.findProperty("POM_SCM_CONNECTION") as String)
+            developerConnection.set(project.findProperty("POM_SCM_DEV_CONNECTION") as String)
+        }
+        developers {
+            developer {
+                id.set(project.findProperty("POM_DEVELOPER_ID") as String)
+                name.set(project.findProperty("POM_DEVELOPER_NAME") as String)
+                url.set(project.findProperty("POM_DEVELOPER_URL") as String)
+            }
+        }
+    }
 }
