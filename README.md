@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center">📖 Compose Stories</h1>
+  <h1 align="center">🤖 📖 Compose Stories</h1>
   <p align="center">
     A lightweight, customizable <b>Instagram-like Stories player</b> for Jetpack Compose.<br/>
     Supports images, videos, progress bars, gestures, titles, and custom styling.
@@ -19,6 +19,8 @@
 
   <p align="center">
     <img src="https://github.com/Xiryl/compose-stories/blob/main/ot/preview.gif?raw=true" width="240" alt="Compose Stories demo 1"/>
+    <img src="https://github.com/Xiryl/compose-stories/blob/main/ot/demo1.png?raw=true" width="240" alt="Compose Stories demo 2"/>
+    <img src="https://github.com/Xiryl/compose-stories/blob/main/ot/demo2.png?raw=true" width="240" alt="Compose Stories demo 3"/>
   </p>
 </p>
 
@@ -91,14 +93,12 @@ val state = remember {
     )
 }
 
-var isPaused by remember { mutableStateOf(false) }
-
 StoryPlayer(
     state = state,
     title = "Demo Story",
     onPrev = { /* go back */ },
     onNext = { /* go forward */ },
-    onPauseChanged = { paused -> isPaused = paused },
+    onPauseChanged = { /* handle pause */ },
     onDismiss = { /* close viewer */ }
 )
 ```
