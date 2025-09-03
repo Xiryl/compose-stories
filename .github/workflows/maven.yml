@@ -1,0 +1,43 @@
+name: Publish to Maven Central
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Configure Gradle credentials (in-memory signing)
+        run: |
+          mkdir -p ~/.gradle
+          cat >> ~/.gradle/gradle.properties << 'EOF'
+          signingInMemoryKey=${{ secrets.SIGNING_KEY }}
+          signingInMemoryKeyPassword=${{ secrets.SIGNING_PASSWORD }}
+          SONATYPE_USERNAME=${{ secrets.SONATYPE_USERNAME }}
+          SONATYPE_PASSWORD=${{ secrets.SONATYPE_PASSWORD }}
+          EOF
+
+      - name: Verify Gradle tasks
+        run: ./gradlew tasks --all
+
+      - name: Publish to Maven Central (Central Portal)
+        run: ./gradlew :library:publishAllPublicationsToCentralPortal --stacktrace --no-daemon
