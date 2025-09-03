@@ -40,4 +40,4 @@ jobs:
         run: ./gradlew tasks --all
 
       - name: Publish to Maven Central (Central Portal)
-        run: ./gradlew :library:publishAllPublicationsToCentralPortal --stacktrace --no-daemon
+        run: ./gradlew :composeStories:publishAllPublicationsToCentralPortal --stacktrace --no-daemon
