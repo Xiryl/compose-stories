@@ -26,11 +26,14 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Publish to Maven Central (Vanniktech + NMCP)
+      - name: Publish to Maven Central
         env:
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_KEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
+
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_PASSWORD }}
+
           ORG_GRADLE_PROJECT_SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           ORG_GRADLE_PROJECT_SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
-        run: |
-          ./gradlew :composeStories:publishToMavenCentral --stacktrace --no-daemon
+        run: ./gradlew :composeStories:publishToMavenCentral --stacktrace --no-daemon
