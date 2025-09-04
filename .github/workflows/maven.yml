@@ -26,18 +26,11 @@ jobs:
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Configure Gradle credentials (in-memory signing)
+      - name: Publish to Maven Central (Vanniktech + NMCP)
+        env:
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
+          ORG_GRADLE_PROJECT_SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
+          ORG_GRADLE_PROJECT_SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
         run: |
-          mkdir -p ~/.gradle
-          cat >> ~/.gradle/gradle.properties << 'EOF'
-          signingInMemoryKey=${{ secrets.SIGNING_KEY }}
-          signingInMemoryKeyPassword=${{ secrets.SIGNING_PASSWORD }}
-          SONATYPE_USERNAME=${{ secrets.SONATYPE_USERNAME }}
-          SONATYPE_PASSWORD=${{ secrets.SONATYPE_PASSWORD }}
-          EOF
-
-      - name: Verify Gradle tasks
-        run: ./gradlew tasks --all
-
-      - name: Publish to Maven Central (Central Portal)
-        run: ./gradlew :composeStories:publishToMavenCentral --stacktrace --no-daemon
+          ./gradlew :composeStories:publishToMavenCentral --stacktrace --no-daemon
