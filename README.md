@@ -67,9 +67,24 @@ Then add the dependency:
 
 ```kotlin
 dependencies {
-    implementation("com.github.xiryl:compose-stories:<version>")
+    implementation("io.github.xiryl:composestory:<version>")
 }
 ```
+
+or by library catalog:
+```kotlin
+// inside libs.versions.toml
+[versions]
+composestory = <version>
+
+[libraries]
+composestory = { module = "io.github.xiryl:composestory", version.ref = "composestory" }
+
+// then inside dependency module
+implementation(libs.composestory)
+```
+
+
 
 ---
 
