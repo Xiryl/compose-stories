@@ -10,7 +10,7 @@
       <img src="https://github.com/Xiryl/compose-stories/actions/workflows/lint.yml/badge.svg" alt="Detekt Status"/>
     </a>
     <a href="https://central.sonatype.com/">
-      <img src="https://img.shields.io/maven-central/v/com.github.xiryl/compose-stories.svg?label=Maven%20Central" alt="Maven Central"/>
+      <img src="https://img.shields.io/maven-metadata/v.svg?label=Maven%20Central&metadataUrl=https%3A%2F%2Frepo1.maven.org%2Fmaven2%2Fio%2Fgithub%2Fxiryl%2Fcomposestory%2Fmaven-metadata.xml" alt="Maven Central"/>
     </a>
     <a href="https://www.apache.org/licenses/LICENSE-2.0">
       <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"/>
@@ -67,9 +67,24 @@ Then add the dependency:
 
 ```kotlin
 dependencies {
-    implementation("com.github.xiryl:compose-stories:<version>")
+    implementation("io.github.xiryl:composestory:<version>")
 }
 ```
+
+or by library catalog:
+```kotlin
+// inside libs.versions.toml
+[versions]
+composestory = <version>
+
+[libraries]
+composestory = { module = "io.github.xiryl:composestory", version.ref = "composestory" }
+
+// then inside dependency module
+implementation(libs.composestory)
+```
+
+
 
 ---
 
